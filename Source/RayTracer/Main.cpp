@@ -5,6 +5,7 @@ int main(int argc, char* argv[])
 {
 	std::cout << "Hello World!";
 
+	// creates and initializes renderer
 	Renderer rend;
 	rend.Initialize();
 	rend.CreateWindow("Ray Tracer", 400, 300);
