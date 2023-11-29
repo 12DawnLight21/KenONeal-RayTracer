@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "Canvas.h"
 
 bool Renderer::Initialize()
 {
@@ -37,7 +38,7 @@ bool Renderer::CreateWindow(const std::string& title, int width, int height)
 
 	// creates the renderer
 	//m_renderer = //create sdl renderer
-	m_renderer = SDL_CreateRenderer(m_window, -1, 0); // not sure what to do for the index , 0 could be SDL_RendererFlags
+	m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC); // not sure what to do for the index , 0 could be SDL_RendererFlags
 	if (!m_renderer)
 	{
 		std::cerr << "SDL Error: " << SDL_GetError() << std::endl;
@@ -45,4 +46,13 @@ bool Renderer::CreateWindow(const std::string& title, int width, int height)
 	}
 
 	return true;
+}
+
+void Renderer::PresentCanvas(const Canvas& canvas)
+{
+	// copy canvas texture to renderer
+	SDL_RenderCopy(m_renderer, canvas.m_texture, nullptr, nullptr); //SDL_RenderCopy(<https://wiki.libsdl.org/SDL2/SDL_RenderCopy Links to an external site.>);
+	
+	// present renderer to screen
+	SDL_RenderPresent(m_renderer);
 }
