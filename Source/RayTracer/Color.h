@@ -1,5 +1,5 @@
 #pragma once
-#include <glm/glm.hpp>
+#include <glm/gtx/color_space.hpp>
 
 class Color
 {
