@@ -2,8 +2,12 @@
 #include "Canvas.h"
 #include "Color.h"
 #include "MathUtils.h"
+#include "Plane.h"
+#include "Sphere.h"
+#include "Mesh.h"
+#include <iomanip>
 
-void Scene::Render(Canvas& canvas, int numSamples)
+void Scene::Render(Canvas& canvas, int numSamples, int depth)
 {
     Random rand;
 	// cast ray for each point (pixel) on the canvas
@@ -33,8 +37,10 @@ void Scene::Render(Canvas& canvas, int numSamples)
                 // cast ray into scene
                 // add color value from trace
                 raycastHit_t raycastHit; 
-                color += Trace(ray, 0, 100, raycastHit, m_depth); 
+                color += Trace(ray, 0, 100, raycastHit, depth); 
             }
+
+            std::cout << std::setprecision(2) << std::setw(5) << ((y / (float)canvas.GetSize().y) * 100) << "%\n";
 
             // draw color to canvas point (pixel)
             // get average color (average = (color + color + color) / number of samples)
