@@ -26,7 +26,7 @@ bool Plane::Hit(const ray_t& ray, float minDistance, float maxDistance, raycastH
         // set raycast hit 
         raycastHit.distance = t; //<set distance>;
         raycastHit.point = ray.At(t); //<set point using At()>;
-        raycastHit.normal = m_normal; //<set normal from plane normal>;
+        raycastHit.normal = glm::normalize(m_normal); //<set normal from plane normal>;
         raycastHit.material = m_material.get(); //<set mateterial>;
 
         return true;
